@@ -19,11 +19,12 @@
 typedef struct shell_builtin
 {
 	char *builtin_name;
-	void(*builtin_func)(shell_info_t *);
+	void (*builtin_func)(shell_info_t *);
+
 } shell_builtin_t;
 
 /**
- * struct shell_info - struct for shell info
+ *struct shell_info - struct for shell info
  * @args: command line args
  * @cmd_buffer: buffer for commands
  * @env_vars: Environment vars
@@ -35,10 +36,10 @@ typedef struct shell_builtin
 typedef struct shell_info
 {
 	char **args;
-	char *cmd-buffer;
+	char *cmd_buffer;
 	char **env_vars;
 	size_t cmd_count;
-	char ** init_args;
+	char **init_args;
 	int exit_code;
 	char **cmd_list;
 } shell_info_t;
