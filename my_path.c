@@ -79,9 +79,9 @@ int execute_shell_command(char *command, shell_info_t *info)
  *
  *Return: void
  */
-void check_executable_path(chell_info_t *info)
+void check_executable_path(shell_info_t *info)
 {
-	char *path, *path_dup = NULL, check = NULL;
+	char *path, *path_dup = NULL, *check = NULL;
 	unsigned int x = 0, n = 0;
 	char **path_tokens;
 	struct stat buf;
@@ -90,7 +90,7 @@ void check_executable_path(chell_info_t *info)
 		n = execute_current_directory(info);
 	else
 	{
-		path = find_directory_existence(info->args[0]);
+		path = find_executable_path(info->env_vars);
 		if (path != NULL)
 		{
 			path_dup = duplicate_custom_string(path + 5);
@@ -145,7 +145,7 @@ int execute_current_directory(shell_info_t *info)
 				print_custom_error(info, NULL);
 			if (child_pid == 0)
 			{
-				if (execve(info->arg[0], info->args, info->env_vars) == -1)
+				if (execve(info->args[0], info->args, info->env_vars) == -1)
 					print_custom_error(info, NULL);
 			}
 			else

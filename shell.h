@@ -12,18 +12,6 @@
 #include <signal.h>
 
 /**
- *struct shell_builtin - struct for shell builtin functions
- *@builtin_name: name of the custom builtin command
- *@builtin_func: pointer to corresponding builtin
- */
-typedef struct shell_builtin
-{
-	char *builtin_name;
-	void (*builtin_func)(shell_info_t *);
-
-} shell_builtin_t;
-
-/**
  *struct shell_info - struct for shell info
  * @args: command line args
  * @cmd_buffer: buffer for commands
@@ -44,17 +32,28 @@ typedef struct shell_info
 	char **cmd_list;
 } shell_info_t;
 
+/**
+ *struct shell_builtin - structure for shell built in function
+ *@builtin_name: Name of the custom builtin command 
+ *@builin_func: function pointer 
+ */
+typedef struct shell_builtin
+{
+	char *builtin_name;
+	void (*builtin_func)(shell_info_t *);
+} shell_builtin_t;
+
 char *custom_strtok_r(char *str, const char *delim);
 void (*identify_shell_builtin(shell_info_t *info))(shell_info_t *info);
 void exit_shell(shell_info_t *info);
-void show_shell_environment(chell_info_t *info);
+void show_shell_environment(shell_info_t *info);
 void set_shell_environment(shell_info_t *info);
-void unset_shell_environment(chell_info_t *info);
+void unset_shell_environment(shell_info_t *info);
 char **create_shell_environment(char **env_vars);
 void destroy_shell_environment(char **env_vars);
 ssize_t print_custom_string(char *str);
 char *duplicate_custom_string(char *str_to_duplicate);
-int compare_custom_strings(char *str1. char *str2);
+int compare_custom_strings(char *str1, char *str2);
 char *concatenate_custom_strings(char *str1, char *str2);
 unsigned int custom_string_length(char *str);
 char **tokenize_command(char *cmd_buffer, char *delimeter);

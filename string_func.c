@@ -1,4 +1,4 @@
-#include <shell.h>
+#include "shell.h"
 
 /**
  * print_custom_string - writes a string to standard output
@@ -77,7 +77,7 @@ char *concatenate_custom_strings(char *str1, char *str2)
 
 	len1 = 0;
 	len2 = 0;
-	if (str == NULL)
+	if (str1 == NULL)
 		len1 = 0;
 	else
 	{
@@ -88,7 +88,7 @@ char *concatenate_custom_strings(char *str1, char *str2)
 		len2 = 0;
 	else
 	{
-		for (len2 = 0; str2[len2; len2++])
+		for (len2 = 0; str2[len2]; len2++)
 			;
 	}
 	new_length = len1 + len2 + 2;

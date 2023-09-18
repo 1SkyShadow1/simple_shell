@@ -1,4 +1,4 @@
-#include <shell.h>
+#include "shell.h"
 
 /**
  * realloc_custom_pointer - Reallocates a pointer to double the space
@@ -18,7 +18,7 @@ char **realloc_custom_pointer(char **ptr, size_t *size)
 		free(ptr);
 		return (NULL);
 	}
-	for (x = 0; x < (*size); i++)
+	for (x = 0; x < (*size); x++)
 	{
 		new_ptr[x] = ptr[x];
 	}

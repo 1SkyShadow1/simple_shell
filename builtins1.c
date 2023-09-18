@@ -10,9 +10,9 @@ void (*identify_shell_builtin(shell_info_t *info))(shell_info_t *info)
 	unsigned int x;
 	shell_builtin_t check[] = {
 		{"exit", exit_shell},
-		{"env", show shell_environment},
+		{"env", show_shell_environment},
 		{"setenv", set_shell_environment},
-		{"unsetenv", uset_shell_environment},
+		{"unsetenv", unset_shell_environment},
 		{NULL, NULL}
 	};
 	x = 0;
@@ -54,8 +54,8 @@ void exit_shell(shell_info_t *info)
 	}
 	free(info->cmd_buffer);
 	free(info->args);
-	fre(info->cmd_list);
-	destroy_shell_environment(info->env_var);
+	free(info->cmd_list);
+	destroy_shell_environment(info->env_vars);
 	exit(info->exit_code);
 
 }
@@ -94,7 +94,7 @@ void set_shell_environment(shell_info_t *info)
 		info->exit_code = 2;
 		return;
 	}
-	ky = find_custom_error(info->env_vars, info->args[1]);
+	ky = find_custom_key(info->env_vars, info->args[1]);
 	if (ky == NULL)
 	{
 		add_custom_key(info);
@@ -113,10 +113,10 @@ void set_shell_environment(shell_info_t *info)
 			exit(127);
 
 		}
-		free(*key);
-		*key = var;
+		free(*ky);
+		*ky = var;
 	}
-	info->exit__code = 0;
+	info->exit_code = 0;
 }
 
 /**
@@ -137,8 +137,8 @@ void unset_shell_environment(shell_info_t *info)
 		return;
 
 	}
-	ky = find_custom_key(info->env_vars, info->arg[1]);
-	if (key == NULL)
+	ky = find_custom_key(info->env_vars, info->args[1]);
+	if (ky == NULL)
 	{
 		print_custom_error(info, ": No variable unset");
 		return;
@@ -157,7 +157,7 @@ void unset_shell_environment(shell_info_t *info)
 	for (y = x + 1; info->env_vars[y] != NULL; y++, x++)
 		newenv[x] = info->env_vars[y];
 	newenv[x] = NULL;
-	fre(*ky);
+	free(*ky);
 	free(info->env_vars);
 	info->env_vars = newenv;
 	info->exit_code = 0;

@@ -1,4 +1,4 @@
-#include <shell.h>
+#include "shell.h"
 
 /**
  * add_custom_key - Create a new environment variable
@@ -68,13 +68,13 @@ char **find_custom_key(char **env_vars, char *key)
  *
  * Return: Pointer to the new string;
  */
-char *add_custom_value(char *key, char char *value)
+char *add_custom_value(char *key,  char *value)
 {
 	unsigned int len1, len2, x, y;
 	char *new;
 
 	len1 = custom_string_length(key);
-	len2 = custom_string_lenght(value);
+	len2 = custom_string_length(value);
 	new = malloc(sizeof(char) * (len1 + len2 + 2));
 	if (new == NULL)
 		return (NULL);

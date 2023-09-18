@@ -1,4 +1,4 @@
-#include <shell.h>
+#include "shell.h"
 
 /**
  * tokenize_command - tokenizes a command buffer with a delimeter
@@ -22,7 +22,7 @@ char **tokenize_command(char *cmd_buffer, char *delimeter)
 	}
 	while ((tokens[x] = custom_strtok_r(cmd_buffer, delimeter)) != NULL)
 	{
-		x++
+		x++;
 			if (x == mcount)
 			{
 				tokens = realloc_custom_pointer(tokens, &mcount);
