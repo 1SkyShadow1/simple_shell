@@ -34,8 +34,8 @@ typedef struct shell_info
 
 /**
  *struct shell_builtin - structure for shell built in function
- *@builtin_name: Name of the custom builtin command 
- *@builin_func: function pointer 
+ *@builtin_name: Name of the custom builtin command
+ *@builtin_func: function pointer
  */
 typedef struct shell_builtin
 {
